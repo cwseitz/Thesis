@@ -13,10 +13,13 @@ config = {
 "patchw": 3,
 "lr": [1e-3,1e-3,0.0,100.0],
 "max_iters": 100,
-"tol": 1e-4
+"tol": 1e-4,
+"particles": 5,
+"B0": 0,
+"pixel_size_lateral": 108.3
 }
 
-mle2dtest = MLE2DIso_Test(config)
+mle2dtest = MLE2DMix_Test(config)
 mle2dtest.test()
 
 
