@@ -1,4 +1,4 @@
-from SMLM.tests import JAC2D_Test
+from .tests import JAC2D_Test
 import matplotlib.pyplot as plt
 import json
 

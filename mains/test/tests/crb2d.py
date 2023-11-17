@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from SMLM.generators import Iso2D
-from SMLM.psf import *
+from BaseSMLM.generators import Iso2D
+from BaseSMLM.psf import *
 from scipy.stats import multivariate_normal
 
 class CRB2D_Test1:

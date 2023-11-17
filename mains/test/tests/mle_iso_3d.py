@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from SMLM.generators import Iso3D
-from SMLM.psf.psf3d import *
+from BaseSMLM.generators import Iso3D
+from BaseSMLM.psf.psf3d import *
 
 class MLE3D_Test:
     """Test a single instance of MLE for 3D psf"""

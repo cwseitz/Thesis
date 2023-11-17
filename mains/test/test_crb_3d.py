@@ -1,4 +1,4 @@
-from SMLM.tests import *
+from .tests import *
 import matplotlib.pyplot as plt
 import json
 
