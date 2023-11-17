@@ -13,15 +13,26 @@ class MLE2DMix_Test:
                             np.load(config['offset'])['arr_0'],
                             np.load(config['var'])['arr_0']]  
 
-    def test(self):
+    def test(self,plot=True):
         nx,ny = self.cmos_params[2].shape
         lr = self.config['lr']
         mix2d = Mix2D(self.config)
-        adu,spikes,theta = mix2d.generate(plot=True)
+        adu,spikes,thetagt = mix2d.generate(plot=True)
+        #theta will have shape (ntheta,nspots) as user level
         adu = adu - self.cmos_params[3]
         adu = np.clip(adu,0,None)
-        theta0 = np.zeros_like(theta); theta0 += theta
-        theta0 += np.random.normal(0,1,size=theta0.shape)
-        opt = MLE2DMix(theta0,adu,self.config,theta_gt=theta)
-        theta, loglike = opt.optimize(max_iters=100,lr=lr,plot_fit=True)
+        theta0 = np.zeros_like(thetagt); theta0 += thetagt
+        theta0 += np.random.normal(0,1,size=theta0.shape) #add parameter noise
+        opt = MLE2DMix(theta0,adu,self.config,theta_gt=thetagt)
+        theta, loglike, conv = opt.optimize(max_iters=100,lr=lr,plot_fit=True)
+        if plot:
+            self.show(adu,theta,theta0,thetagt)
+    def show(self,adu,theta,theta0,thetagt):
+        fig,ax=plt.subplots()
+        ax.imshow(adu,cmap='gray')
+        ax.scatter(theta[1,:],theta[0,:],marker='x',s=5,color='red')
+        ax.scatter(theta0[1,:],theta0[0,:],marker='x',s=5,color='blue')
+        ax.scatter(thetagt[1,:],thetagt[0,:],marker='x',s=5,color='green')
+        #ax.invert_yaxis()
+        plt.show()
 

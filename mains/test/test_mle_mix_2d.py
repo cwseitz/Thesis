@@ -11,7 +11,7 @@ config = {
 "sigma": 0.92,
 "N0": 1000,
 "patchw": 3,
-"lr": [1e-3,1e-3,0.0,100.0],
+"lr": [1e-5,1e-5,0.0,0.0],
 "max_iters": 100,
 "tol": 1e-4,
 "particles": 5,
