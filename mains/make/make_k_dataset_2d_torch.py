@@ -1,7 +1,7 @@
 import numpy as np
 import json
 import matplotlib.pyplot as plt
-from SMLM.generators import Mix2D
+from BaseSMLM.generators import Mix2D
 from skimage.io import imsave
 
 with open('make_k_dataset_2d_torch.json', 'r') as f:

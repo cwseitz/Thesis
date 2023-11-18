@@ -20,7 +20,7 @@ for stack_name in stacks:
     stack = tifffile.imread(stack_name)
     stack_to_images(stack,config['savepath']+base_name)
 
-spikes = False
+spikes = True
 if spikes:
     stacks = sorted(glob(config['path']+'*_spikes.tif'))
     for stack_name in stacks:
