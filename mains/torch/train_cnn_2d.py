@@ -5,15 +5,15 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-import SMLM.torch.train.loss as module_loss
-import SMLM.torch.train.metrics as module_metric
-import SMLM.torch.models as module_arch
+import DeepSMLM.torch.train.loss as module_loss
+import DeepSMLM.torch.train.metrics as module_metric
+import DeepSMLM.torch.models as module_arch
 
-from SMLM.torch.utils import ConfigParser
-from SMLM.torch.utils import prepare_device
-from SMLM.torch.train import LocalizationTrainer
+from DeepSMLM.torch.utils import ConfigParser
+from DeepSMLM.torch.utils import prepare_device
+from DeepSMLM.torch.train import LocalizationTrainer
 
-from SMLM.torch.loaders import SMLMDataLoader
+from DeepSMLM.torch.loaders import SMLMDataLoader
 from torchsummary import summary
 
 train_config = 'train_cnn_2d.json'
@@ -31,7 +31,7 @@ model = train_config.init_obj('arch', module_arch)
 logger.info(model)
 
 
-n_gpu = 0
+n_gpu = 1
 device, device_ids = prepare_device(n_gpu)
 model = model.to(device)
 if len(device_ids) > 1:
