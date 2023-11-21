@@ -10,7 +10,7 @@ from BaseSMLM.generators import Mix2D
 from DeepSMLM.torch.utils import prepare_device
 from DeepSMLM.torch.models import LocalizationCNN
 from DeepSMLM.torch.train.metrics import jaccard_coeff
-from DeepSMLM.localize import NeuralEstimator2D
+from DeepSMLM.localize import NeuralEstimator2D, NeuralEstimatorLoG2D
 from scipy.spatial.distance import cdist
 
 class CNN2D_Test:
@@ -26,20 +26,27 @@ class CNN2D_Test:
     def test(self,plot=True):
         mix2d = Mix2D(self.config)
         adu,spikes,thetagt = mix2d.generate(plot=True)
-        self.estimator = NeuralEstimator2D(self.config)
+        self.estimator = NeuralEstimatorLoG2D(self.config)
         adu = adu[np.newaxis,np.newaxis,:,:]
-        spots = self.estimator.forward(adu)
+        spots,outputs = self.estimator.forward(adu)
         if plot:
-            self.show(adu,spots,thetagt)
+            self.show(adu,outputs,spots,thetagt)
             
-    def show(self,adu,spots,thetagt):
-        fig,ax=plt.subplots()
-        ax.imshow(np.squeeze(adu),cmap='gray')
-        ax.scatter(spots['y'],spots['x'],marker='x',
+    def show(self,adu,outputs,spots,thetagt):
+        fig,ax=plt.subplots(1,2)
+        ax[0].imshow(np.squeeze(adu),cmap='gray')
+        ax[0].scatter(spots['y']/4,spots['x']/4,marker='x',
                    color='red',s=5,label='CNN')
-        ax.scatter(thetagt[1,:],thetagt[0,:],marker='x',
+        ax[0].scatter(thetagt[1,:],thetagt[0,:],marker='x',
                    color='blue',s=5,label='True')
-        ax.legend()
+        ax[0].legend()
+        ax[1].imshow(outputs,cmap='plasma')
+        ax[1].scatter(spots['y'],spots['x'],marker='x',
+                   color='red',s=5,label='CNN')
+        ax[1].scatter(4*thetagt[1,:],4*thetagt[0,:],marker='x',
+                   color='cyan',s=5,label='True')
+        ax[1].legend()
+        plt.tight_layout()
         plt.show()
 
     def load_model(self):

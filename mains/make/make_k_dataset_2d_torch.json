@@ -1,6 +1,6 @@
 {
 "savepath": "/home/cwseitz/Desktop/Torch/Train2D/",
-"ngenerate": 100,
+"ngenerate": 1000,
 "prefix": "231118_Mix2D_k",
 "texp": 1.0,
 "nx": 12,
