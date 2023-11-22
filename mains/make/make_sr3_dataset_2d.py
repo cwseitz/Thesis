@@ -1,7 +1,7 @@
 import numpy as np
 import json
 import matplotlib.pyplot as plt
-from SMLM.generators import Mix2D_SR3_Ring
+from BaseSMLM.generators import Mix2D_SR3_Ring
 from skimage.io import imsave
 from scipy.ndimage import zoom
 

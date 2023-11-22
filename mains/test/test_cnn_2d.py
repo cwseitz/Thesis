@@ -30,7 +30,7 @@ config = {
 "texp": 1.0,
 "eta": 0.8,
 "particles" : 5,
-"modelname": "1118_185147",
+"modelname": "1121_204931",
 "pixel_size_lateral": 108.3,
 "min_sigma": 1,
 "max_sigma": 3,

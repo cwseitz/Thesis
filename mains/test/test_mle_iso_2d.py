@@ -10,6 +10,7 @@ config = {
 "var": "cmos/var.npz",
 "sigma": 0.92,
 "N0": 1000,
+"B0": 0,
 "patchw": 3,
 "lr": [1e-3,1e-3,0.0,100.0],
 "max_iters": 100,
@@ -18,6 +19,7 @@ config = {
 
 mle2dtest = MLE2DIso_Test(config)
 mle2dtest.test()
+
 
 
 

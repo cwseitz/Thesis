@@ -1,7 +1,7 @@
 {
-"savepath": "/research2/shared/cwseitz/Data/STORM/230815/",
+"savepath": "/home/cwseitz/Desktop/Torch/Train2D/",
 "ngenerate": 1000,
-"prefix": "230815_Mix2D_SR3_k",
+"prefix": "231121_Mix2D_Ring_k",
 "texp": 1.0,
 "hpixels": 256,
 "lpixels": 32,

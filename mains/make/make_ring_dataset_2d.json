@@ -1,10 +1,8 @@
 {
 "savepath": "/home/cwseitz/Desktop/Torch/Train2D/",
-"ngenerate": 100,
-"prefix": "231118_Mix2D_k",
+"ngenerate": 1000,
+"prefix": "231121_Mix2D_Ring",
 "texp": 1.0,
-"nx": 12,
-"ny": 12,
 "eta": 0.8,
 "sigma": 0.92,
 "gain": "cmos/gain.npz",
@@ -12,6 +10,8 @@
 "var": "cmos/var.npz",
 "N0": 1000,
 "B0": 0,
-"pixel_size_lateral": 108.3,
-"particles": [5]
+"pixel_size": 108.3,
+"particles": 5,
+"ring_radius": 1,
+"patchw": 3
 }
