@@ -1,8 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from BaseSMLM.generators import Iso2D
+#from BaseSMLM.generators import Iso2D
 from BaseSMLM.psf.psf2d import *
-from .mcmc import *
 
 class MLE2DIso_Test:
     """Test a single instance of maximum likelihood estimation"""

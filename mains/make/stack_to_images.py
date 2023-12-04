@@ -11,7 +11,7 @@ def stack_to_images(stack,base_name):
     for n in range(nb):
         imsave(base_name+f'-{n}.tif',np.squeeze(stack[n]))
 
-with open('make_stack_to_images.json', 'r') as f:
+with open('stack_to_images.json', 'r') as f:
     config = json.load(f)
 
 stacks = sorted(glob(config['path']+'*_adu.tif'))

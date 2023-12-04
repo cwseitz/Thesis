@@ -1,7 +1,7 @@
 import numpy as np
 import umap
 import matplotlib.pyplot as plt
-from BaseSMLM.generators import Mix2D
+#from BaseSMLM.generators import Mix2D
 from BaseSMLM.psf.psf2d import *
 from BaseSMLM.psf.psf2d.mix import *
 

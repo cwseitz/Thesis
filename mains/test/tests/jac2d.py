@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from BaseSMLM.generators import Iso2D
+#from BaseSMLM.generators import Iso2D
 from BaseSMLM.psf.psf2d import *
 
 class JAC2D_Test:

@@ -1,11 +1,10 @@
 {
 "savepath": "/home/cwseitz/Desktop/Torch/Train2D/",
-"ngenerate": 1000,
-"prefix": "231121_Ring2D",
+"ngenerate": 10000,
+"prefix": "231202_Brown2D",
 "nx": 20,
 "ny": 20,
-"pixel_size": 108.3,
-"radius": 3,
+"radius": 1,
 "nspots": 5,
 "kwargs":{
 "texp": 1.0,

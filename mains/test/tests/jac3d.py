@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from BaseSMLM.generators import Iso3D
+#from BaseSMLM.generators import Iso3D
 from BaseSMLM.psf import *
 
 class JAC3D_Test:
