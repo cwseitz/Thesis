@@ -10,10 +10,10 @@ config = {
 "N0": 1000,
 "nspots" : 5,
 "radius": 3,
-"modelname": "1204_045829",
+"modelname": "1204_192720",
 }
 
-vae2dtest = VAE2D_Test(config)
+vae2dtest = VAE1_Test(config)
 vae2dtest.test()
 
 

@@ -4,7 +4,7 @@
 "prefix": "231202_Brown2D",
 "nx": 20,
 "ny": 20,
-"radius": 1,
+"radius": 5.0,
 "nspots": 5,
 "kwargs":{
 "texp": 1.0,

@@ -16,20 +16,19 @@ from DeepSMLM.torch.train import VAETrainer
 from DeepSMLM.torch.loaders import VAEDataLoader
 from torchsummary import summary
 
-train_config = 'train_vae_2d.json'
+train_config = 'train_vae2_2d.json'
 file = open(train_config)
 train_config = json.load(file)
 train_config = ConfigParser(train_config)
 logger = train_config.get_logger('train')
 
-batch_size = 4
+batch_size = 64
 dataloader = VAEDataLoader(train_config['data_loader']['path'],batch_size,validation_split=0.1,shuffle=False)
 
 
 valid_data_loader = dataloader.split_validation()
 model = train_config.init_obj('arch', module_arch)
 logger.info(model)
-
 
 n_gpu = 1
 device, device_ids = prepare_device(n_gpu)
@@ -52,4 +51,5 @@ trainer = VAETrainer(model, criterion, metrics, optimizer,
                                           
 
 trainer.train()
+
 

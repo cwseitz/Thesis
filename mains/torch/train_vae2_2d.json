@@ -3,7 +3,7 @@
 		"n_gpu": 1,
 
 		"arch": {
-				"type": "LocalizationVAE",
+				"type": "LocalizationVAE2",
 				"args": {"latent_dim": 10, "nx": 20, "ny": 20}
 		},
 		"data_loader": {
@@ -26,7 +26,7 @@
 		},
 		"trainer": {
 				"epochs": 50,
-				"save_dir": "/home/cwseitz/Desktop/Torch/Models2D/",
+				"save_dir": "/home/cwseitz/Desktop/Torch/Models2D/VAE2/",
 				"save_period": 10,
 				"verbosity": 2,
 				"monitor": "min val_loss",

@@ -3,8 +3,8 @@
 		"n_gpu": 1,
 
 		"arch": {
-				"type": "LocalizationCNN",
-				"args": {"nz": 1, "scaling_factor": 800, "dilation_flag": true}
+				"type": "UNetModel",
+				"args": {"n_channels": 1, "n_classes": 2}
 		},
 		"data_loader": {
 		         "path":"/home/cwseitz/Desktop/Torch/Train2D/"},
@@ -16,7 +16,7 @@
 						"amsgrad": true
 				}
 		},
-		"loss": "KDE_loss3D",
+		"loss": "CrossEntropyLoss",
 		"lr_scheduler": {
 				"type": "StepLR",
 				"args": {
@@ -26,7 +26,7 @@
 		},
 		"trainer": {
 				"epochs": 50,
-				"save_dir": "/home/cwseitz/Desktop/Torch/Models2D/DeepSTORM/",
+				"save_dir": "/home/cwseitz/Desktop/Torch/Models2D/",
 				"save_period": 10,
 				"verbosity": 2,
 				"monitor": "min val_loss",

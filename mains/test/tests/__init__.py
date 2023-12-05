@@ -5,7 +5,9 @@ from .jac3d import *
 
 from .cnn2d import *
 from .cnn3d import *
-from .vae2d import *
+from .vae1 import *
+from .vae2 import *
+from .unet import *
 
 from .mle_iso_2d import *
 from .mle_iso_3d import *
