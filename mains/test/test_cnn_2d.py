@@ -22,7 +22,7 @@ config = {
 "num_sigma":5
 }
 
-cnn2dtest = CNNLog2D_Test(config)
+cnn2dtest = CNNDouble_Test(config)
 cnn2dtest.test()
 
 

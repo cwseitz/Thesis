@@ -29,7 +29,7 @@ dataloader = VAEDataLoader(train_config['data_loader']['path'],batch_size,valida
 valid_data_loader = dataloader.split_validation()
 model = train_config.init_obj('arch', module_arch)
 cnn_path = '/home/cwseitz/Desktop/Torch/Models2D/DeepSTORM/'
-cnn_name = '1205_040712'
+cnn_name = '1206_150420'
 model.load_cnn(cnn_path,cnn_name)
 logger.info(model)
 
@@ -46,6 +46,7 @@ trainable_params = filter(lambda p: p.requires_grad, model.parameters())
 optimizer = train_config.init_obj('optimizer', torch.optim, trainable_params)
 lr_scheduler = train_config.init_obj('lr_scheduler', torch.optim.lr_scheduler, optimizer)
 
+
 #summary(model,(1,20,20))
 trainer = VAETrainer(model, criterion, metrics, optimizer,
                      config=train_config,device=device,
@@ -53,7 +54,6 @@ trainer = VAETrainer(model, criterion, metrics, optimizer,
                      valid_data_loader=valid_data_loader,
                      lr_scheduler=lr_scheduler)
                                           
-
 trainer.train()
 
 

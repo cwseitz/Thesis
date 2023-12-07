@@ -27,5 +27,14 @@ if spikes:
         base_name = stack_name.split('.')[0].split('/')[-1]
         stack = tifffile.imread(stack_name)
         stack_to_images(stack,config['savepath']+base_name)
+        
+smm = True 
+if smm:
+    stacks = sorted(glob(config['path']+'*_sum.tif'))
+    for stack_name in stacks:
+        base_name = stack_name.split('.')[0].split('/')[-1]
+        stack = tifffile.imread(stack_name)
+        stack_to_images(stack,config['savepath']+base_name)
+        
     
 

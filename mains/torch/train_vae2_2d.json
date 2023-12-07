@@ -4,7 +4,7 @@
 
 		"arch": {
 				"type": "LocalizationVAE2",
-				"args": {"latent_dim": 10, "nx": 20, "ny": 20}
+				"args": {"latent_dim": 10, "nx": 39, "ny": 39}
 		},
 		"data_loader": {
 		         "path":"/home/cwseitz/Desktop/Torch/Train2D/"},

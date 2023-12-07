@@ -16,25 +16,28 @@ def show_double(adu,double):
 with open('make_double_disc.json', 'r') as f:
     config = json.load(f)
     
-stack = []; theta = []; spikes = []
-show = True
+stack = []; theta = []; spikes = []; summed = []
+show = False
 for n in range(config['ngenerate']):
     print(f'Generating frame {n}')
-    disc2d = Ring2D_TwoState(config['nx'],config['ny'])
+    disc2d = Disc2D_TwoState(config['nx'],config['ny'])
     nspots = config['nspots']
     args = [config['radius'],nspots]
     fig,ax=plt.subplots(1,2)
     kwargs = config['kwargs']
     adu,_spikes,_theta = disc2d.forward(*args,**kwargs)
+    ssum = np.sum(adu,axis=0)
     auto,doubled = Double(adu)
     if show:
         show_double(adu,doubled)
     _spikes = _spikes.astype(np.int16)
     stack.append(doubled); spikes.append(_spikes[0])
-    theta.append(_theta);
+    theta.append(_theta); summed.append(ssum)
     
 stack = np.array(stack); theta = np.array(theta); spikes = np.array(spikes)
+summed = np.array(summed)
 imsave(config['savepath']+config['prefix']+'_adu.tif',stack)
+imsave(config['savepath']+config['prefix']+'_sum.tif',summed)
 imsave(config['savepath']+config['prefix']+'_spikes.tif',spikes)
 file = config['savepath']+config['prefix']+'_adu.npz'
 np.savez(file,theta=theta)

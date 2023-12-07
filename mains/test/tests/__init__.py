@@ -8,6 +8,7 @@ from .cnn3d import *
 from .vae1 import *
 from .vae2 import *
 from .unet import *
+from .double import *
 
 from .mle_iso_2d import *
 from .mle_iso_3d import *

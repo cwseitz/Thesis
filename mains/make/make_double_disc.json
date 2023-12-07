@@ -1,10 +1,10 @@
 {
-"savepath": "/home/cwseitz/Desktop/Torch/Train2D/",
+"savepath": "/home/cwseitz/Desktop/Torch/Train2D_2/",
 "ngenerate": 10000,
 "prefix": "231202_Double2D",
 "nx": 20,
 "ny": 20,
-"radius": 2.0,
+"radius": 3.0,
 "nspots": 5,
 "kwargs":{
 "texp": 1.0,

@@ -12,6 +12,7 @@ from DeepSMLM.torch.utils import prepare_device
 from DeepSMLM.torch.models import LocalizationCNN
 from DeepSMLM.torch.train.metrics import jaccard_coeff
 from DeepSMLM.localize import NeuralEstimator2D, NeuralEstimatorLoG2D
+from SPICE.utils import Double
 from scipy.spatial.distance import cdist
 
 class CNNLog2D_Test:
