@@ -1,0 +1,14 @@
+{
+"savepath": "/home/cwseitz/Desktop/Torch/Train2D/",
+"ngenerate": 1000,
+"prefix": "231127_Ring_Rad1_SPAD",
+"nx": 20,
+"ny": 20,
+"sigma": 0.92,
+"lam0": 1000,
+"nt": 100,
+"particles": 5,
+"ring_radius": 2,
+"patchw": 3
+}
+
