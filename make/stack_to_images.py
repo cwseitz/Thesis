@@ -11,7 +11,7 @@ def stack_to_images(stack,base_name):
     for n in range(nb):
         imsave(base_name+f'-{n}.tif',np.squeeze(stack[n]))
 
-with open('make_stack_to_images.json', 'r') as f:
+with open('stack_to_images.json', 'r') as f:
     config = json.load(f)
 
 stacks = sorted(glob(config['path']+'*_adu.tif'))
@@ -27,5 +27,14 @@ if spikes:
         base_name = stack_name.split('.')[0].split('/')[-1]
         stack = tifffile.imread(stack_name)
         stack_to_images(stack,config['savepath']+base_name)
+        
+smm = True 
+if smm:
+    stacks = sorted(glob(config['path']+'*_sum.tif'))
+    for stack_name in stacks:
+        base_name = stack_name.split('.')[0].split('/')[-1]
+        stack = tifffile.imread(stack_name)
+        stack_to_images(stack,config['savepath']+base_name)
+        
     
 

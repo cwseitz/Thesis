@@ -5,7 +5,7 @@ import numpy as np
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import napari
-from BaseSMLM.generators import Mix3D
+#from BaseSMLM.generators import Mix3D
 from DeepSMLM.torch.utils import prepare_device
 from DeepSMLM.torch.models import LocalizationCNN
 from DeepSMLM.torch.train.metrics import jaccard_coeff

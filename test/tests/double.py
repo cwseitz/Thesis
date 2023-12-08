@@ -28,6 +28,7 @@ class CNNDouble_Test:
         mix2d.forward(*args,**kwargs)
         self.estimator = NeuralEstimator2D(config)
         auto,doubled = Double(adu)
+        doubled = doubled[0]
         smm = np.sum(adu,axis=0)
         doubled = doubled[np.newaxis,np.newaxis,:,:]
         spots,outputs = self.estimator.forward(doubled)
