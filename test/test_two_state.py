@@ -8,12 +8,13 @@ radius = 5
 nspots = 5
 nx = ny = 20
 
-disc2d = Ring2D_TwoState(nx,ny)
-adu,spikes,theta = disc2d.forward(radius,nspots,N0=1.0,offset=0.0,var=0.0,nframes=1000,show=False)
+disc2d = Disc2D_TwoState(nx,ny)
+adu,spikes,theta = disc2d.forward(radius,nspots,N0=10.0,B0=0.2,offset=0.0,var=0.0,nframes=100,show=False)
 auto,doubled = Double(adu)
 imsave('/home/cwseitz/Desktop/adu.tif',adu)
 imsave('/home/cwseitz/Desktop/doubled.tif',doubled)
 
+"""
 stack = imread('/home/cwseitz/Desktop/doubled.tif')
 nt,nx,ny = stack.shape
 stack = stack.reshape((nt,nx*ny))
@@ -21,6 +22,7 @@ fig,ax=plt.subplots()
 for n in range(nx*ny):
     ax.plot(stack[:,n])
 plt.show()
+"""
 
 """
 fig,ax=plt.subplots(1,3)
