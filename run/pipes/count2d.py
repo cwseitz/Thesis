@@ -1,10 +1,10 @@
-from SMLM.utils.tile import *
-from SMLM.segment import SegmentCNN, SegmentThreshold
-from SMLM.utils.count import CountMatrix
+#from SMLM.utils.tile import *
+#from SMLM.segment import SegmentCNN, SegmentThreshold
+#from SMLM.utils.count import CountMatrix
 from skimage.io import imsave
 from pathlib import Path
 from pycromanager import Dataset
-from SMLM.localize import LoGDetector
+from BaseSMLM.localize import LoGDetector
 from skimage.measure import label
 import napari
 import pandas as pd

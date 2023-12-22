@@ -4,8 +4,8 @@ import tifffile
 import matplotlib.pyplot as plt
 import json
 from pathlib import Path
-from SMLM.localize import LoGDetector
-from SMLM.psf.psf3d import MLE3D, MLE3D_MCMC, hessiso_auto3d
+from BaseSMLM.localize import LoGDetector
+from BaseSMLM.psf.psf3d import MLE3D, MLE3D_MCMC, hessiso_auto3d
 from numpy.linalg import inv
 
 class PipelineMLE3D_MCMC:

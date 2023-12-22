@@ -12,13 +12,11 @@ config = {
 "N0": 1000,
 "B0": 0,
 "patchw": 3,
-"lr": [1e-3,1e-3,0.0,100.0],
 "max_iters": 100,
-"tol": 1e-4
 }
 
-mle2dtest = MLE2DIso_Test(config)
-mle2dtest.test()
+mle2dtest = MLE2D_BFGS_Test(config)
+mle2dtest.test(niters=100)
 
 
 

@@ -5,7 +5,7 @@ import numpy as np
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 
-from SMLM.localize import NeuralEstimator3D
+from DeepSMLM.localize import NeuralEstimator3D
 
 
 class PipelineCNN3D:

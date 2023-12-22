@@ -4,6 +4,7 @@ from skimage.io import imread,imsave
 import matplotlib.pyplot as plt
 import numpy as np
 
+"""
 radius = 5
 nspots = 5
 nx = ny = 20
@@ -13,6 +14,14 @@ adu,spikes,theta = disc2d.forward(radius,nspots,N0=10.0,B0=0.2,offset=0.0,var=0.
 auto,doubled = Double(adu)
 imsave('/home/cwseitz/Desktop/adu.tif',adu)
 imsave('/home/cwseitz/Desktop/doubled.tif',doubled)
+"""
+
+adu = imread('/home/cwseitz/Desktop/summed_Stack.tif')
+auto,doubled = Double(adu)
+fig,ax=plt.subplots(1,2)
+ax[0].imshow(np.sum(adu,axis=0),cmap='gray')
+ax[1].imshow(doubled[0],cmap='gray')
+plt.show()
 
 """
 stack = imread('/home/cwseitz/Desktop/doubled.tif')
