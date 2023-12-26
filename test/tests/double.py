@@ -25,7 +25,7 @@ class CNNDouble_Test:
         args = [config['disc_radius'],config['nspots']]
         kwargs = config['kwargs']
         adu,spikes,thetagt =\
-        mix2d.forward(*args,**kwargs,show=True)
+        mix2d.forward(*args,**kwargs,show=False)
         self.estimator = NeuralEstimator2D(config)
         auto,doubled = Double(adu)
         doubled = doubled[0]
