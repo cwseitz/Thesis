@@ -1,90 +1,92 @@
 import json
 from pipes import *
 import pandas as pd
-from SMLM.utils import make_animation
+import trackpy as tp
+from DeepSMLM.torch.dataset import SMLMDataset
+from BaseSMLM.utils import make_animation, Tracker2D
 from skimage.io import imread
 
 prefixes = [
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__2',
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__4',
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__5',
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__7',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__12',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__15',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__19',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__31',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__4'
+'231226_BD_5mw_100ms_JF646_2pm_1hour__14',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__18',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__20',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__21',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__3',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__33',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__34',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__35',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__42',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__5',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__9'
 ]
-
-
-with open('run_track_2d.json', 'r') as f:
-    config = json.load(f)
-    config['analpath'] += 'BRD4/'
-    config['datapath'] += 'BRD4/'
-
-all_spots = []
-for n,prefix in enumerate(prefixes):
-    print("Processing " + prefix)
-    pipe = PipelineTrack2D(config,prefix)
-    spots = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_spots.csv')
-    stack = imread(config['datapath']+prefix+'.tif')
-    make_animation(stack,spots)
-    spots = pipe.link(filter=True,min_length=10,search_range=1)
-    spots['particle'] += 20000*n #just pick a big number (larger than the number of particles per cell)
-    all_spots.append(spots)
-    
-pipe = PipelineTrack2D(config,prefix)
-all_spots = pd.concat(all_spots)
-im_brd4 = pipe.imsd(all_spots,max_lagtime=5)
-
-
-###############################################
 
 prefixes = [
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__1',
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__6',
-'231009_Cotransfection_BRD4 1000ng_H2B 1000ng_5pm_1hours_L640-5mW_L488-10mW_100ms__7',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-10mW_L488-10mW_100ms__2',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__11',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__12',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__13',
-'231009_Cotransfection_BRD4 1000ng_H2B 500ng_5pm_1hours_L640-5mW_L488-10mW_100ms__5'
+'231226_WT_5mw_100ms_JF646_2pm_1hour__11',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__14',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__19',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__21',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__29',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__30',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__32',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__5',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__7',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__8' 
+]
+
+prefixes = [
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__11',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__14',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__15',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__16',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__17',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__27',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__32',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__4',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__5',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__7',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__9'
+]
+
+prefixes = [
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__1',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__10',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__14',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__15',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__17',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__19',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__24',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__3',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__35',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__4',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__5',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__6',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__8',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__9',
 ]
 
 with open('run_track_2d.json', 'r') as f:
     config = json.load(f)
-    config['analpath'] += 'H2B/'
-    config['datapath'] += 'H2B/'
 
-all_spots = []
 for n,prefix in enumerate(prefixes):
     print("Processing " + prefix)
-    pipe = PipelineTrack2D(config,prefix)
-    #spots = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_spots.csv')
-    #stack = imread(config['datapath']+prefix+'.tif')
-    #make_animation(stack,spots)
-    spots = pipe.link(filter=True,min_length=10,search_range=1)
-    spots['particle'] += 20000*n #just pick a big number (larger than the number of particles per cell)
-    all_spots.append(spots)
+    dataset = SMLMDataset(config['datapath']+prefix,prefix)
+    tracker = Tracker2D()
+    spots = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_spots.csv')
+    spots = spots.loc[spots['conv'] == True]
+    spots = spots.loc[(spots['x_err']  < 0.03) & (spots['y_err']  < 0.03)]
+    linked = tracker.link(spots)
+    linked = tp.filter_stubs(linked,80)
+    tp.plot_traj(linked,superimpose=dataset.stack[0],
+                 pos_columns=['y_mle','x_mle'])
+                 
+    """
+    linked.to_csv(config['analpath'] + prefix + '/' + prefix + '_link.csv')
 
-pipe = PipelineTrack2D(config,prefix)
-all_spots = pd.concat(all_spots)
-im_h2b = pipe.imsd(all_spots,max_lagtime=5)
+    im = tracker.imsd(linked)
+    im.to_csv(config['analpath'] + prefix + '/' + prefix + '_msd.csv')
+    vh = tracker.vanhove(linked)
+    vh.to_csv(config['analpath'] + prefix + '/' + prefix + '_vhe.csv')
+    """
 
-###############################################
-
-fig, ax = plt.subplots()
-avg_msd_brd4 = np.mean(im_brd4.values,axis=1)
-avg_msd_brd4 = np.insert(avg_msd_brd4,0,0)
-avg_msd_h2b = np.mean(im_h2b.values,axis=1)
-avg_msd_h2b = np.insert(avg_msd_h2b,0,0)
-ax.plot(avg_msd_brd4,color='blue',label='BRD4')
-ax.plot(avg_msd_h2b,color='red',label='H2B')
-ax.set(ylabel=r'$\langle \Delta r^2 \rangle$ [$\mu$m$^2$]',
-       xlabel='lag time $t$')
-#ax.set_xscale('log')
-#ax.set_yscale('log')
-
-plt.show()
 
 
