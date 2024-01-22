@@ -7,7 +7,7 @@
 				"args": {"nz": 1, "scaling_factor": 800, "dilation_flag": true}
 		},
 		"data_loader": {
-		         "path":"/home/cwseitz/Desktop/Torch/Train2D/"},
+		         "path":"/home/cwseitz/Desktop/Torch/Train/"},
 		"optimizer": {
 				"type": "Adam",
 				"args":{
@@ -26,7 +26,7 @@
 		},
 		"trainer": {
 				"epochs": 50,
-				"save_dir": "/home/cwseitz/Desktop/Torch/Models2D/DeepSTORM/",
+				"save_dir": "/home/cwseitz/Desktop/Torch/Models/DeepSTORM/",
 				"save_period": 10,
 				"verbosity": 2,
 				"monitor": "min val_loss",

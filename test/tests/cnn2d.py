@@ -6,13 +6,11 @@ import numpy as np
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import napari
-from BaseSMLM.generators import Brownian2D
-from BaseSMLM.psf.psf2d.mix import MLE2DMix
 from DeepSMLM.torch.utils import prepare_device
 from DeepSMLM.torch.models import LocalizationCNN
 from DeepSMLM.torch.train.metrics import jaccard_coeff
 from DeepSMLM.localize import NeuralEstimator2D, NeuralEstimatorLoG2D
-from SPICE.utils import Double
+from oci.utils import G2
 from scipy.spatial.distance import cdist
 
 class CNNLog2D_Test:

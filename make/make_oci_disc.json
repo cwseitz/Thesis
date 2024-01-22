@@ -1,7 +1,7 @@
 {
-"savepath": "/home/cwseitz/Desktop/Torch/Train2D_2/",
+"savepath": "/home/cwseitz/Desktop/Torch/Train/",
 "ngenerate": 10000,
-"prefix": "231202_Double2D",
+"prefix": "240118_Coherence2D",
 "nx": 20,
 "ny": 20,
 "radius": 3.0,
@@ -9,8 +9,11 @@
 "kwargs":{
 "texp": 1.0,
 "eta": 0.5,
-"sigma": 0.92,
-"N0": 100,
+"sigma": 0.55,
+"nframes": 100,
+"N00": 0,
+"N01": 100,
+"B0": 10,
 "gain": 1.0,
 "offset": 0.0,
 "var": 0.0

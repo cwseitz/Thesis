@@ -5,7 +5,7 @@
 
 from .cnn2d import *
 from .cnn3d import *
-from .double import *
+from .coherence import *
 
 from .mle_iso_2d import *
 #from .mle_iso_3d import *
