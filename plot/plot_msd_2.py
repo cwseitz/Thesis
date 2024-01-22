@@ -3,9 +3,42 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import trackpy as tp
+import seaborn as sns
 from BaseSMLM.utils import Tracker2D
+from plot_msd import *
+
+def plot_kde_for_each_row(dataframe,ax,color='red'):
+    sns.set(style="whitegrid")
+    rows = dataframe.index
+    for n,row in enumerate(rows):
+        sns.kdeplot(dataframe.loc[row,:], ax=ax[n], color=color)
+        ax[n].set_xlabel(r'$\langle \Delta r^2 \rangle$ [$\mu$m$^2$]')
+        ax[n].set_title(r'$\tau$='+f'{rows[n]} sec')
+        
+
+prefixes_bd = [
+'231226_BD_5mw_100ms_JF646_2pm_1hour__16',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__17',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__25',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__29',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__30',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__38',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__39',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__40',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__8'
+]
 
 prefixes_wt = [
+'231226_WT_5mw_100ms_JF646_2pm_1hour__15',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__16',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__23',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__24',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__26',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__33',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__3'
+]
+
+prefixes_wt += [
 '231226_WT_5mw_100ms_JF646_2pm_1hour__11',
 '231226_WT_5mw_100ms_JF646_2pm_1hour__14',
 '231226_WT_5mw_100ms_JF646_2pm_1hour__19',
@@ -18,7 +51,7 @@ prefixes_wt = [
 '231226_WT_5mw_100ms_JF646_2pm_1hour__8' 
 ]
 
-prefixes_bd = [
+prefixes_bd += [
 '231226_BD_5mw_100ms_JF646_2pm_1hour__14',
 '231226_BD_5mw_100ms_JF646_2pm_1hour__18',
 '231226_BD_5mw_100ms_JF646_2pm_1hour__20',
@@ -57,36 +90,20 @@ for n,prefix in enumerate(prefixes_bd):
     
 imsds_bd = pd.concat(imsds_bd,axis=1,ignore_index=True)
 
-"""
-fig, ax = plt.subplots()
-ax.plot(imsds_bd.index, imsds_bd, 'k-', color='red', alpha=0.1)
-ax.plot(imsds_wt.index, imsds_wt, 'k-', color='black', alpha=0.1)
-ax.set(ylabel=r'$\langle \Delta r^2 \rangle$ [$\mu$m$^2$]',
-       xlabel='lag time $t$')
-"""
-
-fig, ax = plt.subplots(figsize=(3.5,3))
-nt,ns = imsds_bd.shape
-bd_stderr = imsds_bd.std(axis=1)/np.sqrt(ns)
-bd_stderr = np.concatenate([np.array([]),bd_stderr])
-tau = np.concatenate([np.array([]),imsds_bd.index])
-avg_msd = imsds_bd.mean(axis=1)
-avg_msd = np.concatenate([np.array([]),avg_msd])
-ax.errorbar(tau, avg_msd, yerr=bd_stderr,color='red',marker='o',capsize=3.0,alpha=0.5,label='BD')
-
-nt,ns = imsds_wt.shape
-wt_stderr = imsds_wt.std(axis=1)/np.sqrt(ns)
-wt_stderr = np.concatenate([np.array([]),wt_stderr])
-tau = np.concatenate([np.array([]),imsds_wt.index])
-avg_msd = imsds_wt.mean(axis=1)
-avg_msd = np.concatenate([np.array([]),avg_msd])
-ax.errorbar(tau, avg_msd, yerr=wt_stderr,color='black',marker='o',capsize=3.0,alpha=0.5,label='WT')
-ax.set(ylabel=r'$\log_{10}\langle \Delta r^2 \rangle$ [$\mu$m$^2$]',
-       xlabel=r'$\log_{10}\tau$ (sec)')
-       
-ax.set_xscale('log')
-ax.set_yscale('log')
-ax.legend(loc='upper left')
-plt.tight_layout()
+fig,ax=plt.subplots()
+plot_msds(imsds_wt,ax,color='black')
+plot_msds(imsds_bd,ax,color='blue')
 plt.show()
 
+fig, ax = plt.subplots(figsize=(3.5,3))
+plot_avg_msd(imsds_wt,ax,color='black',label='WT')
+plot_avg_msd(imsds_bd,ax,color='blue',label='BD')
+plt.show()
+
+nrows = imsds_wt.shape[0]
+fig,ax=plt.subplots(2,5,figsize=(10,4))
+ax = ax.ravel()
+plot_kde_for_each_row(imsds_bd,ax,color='blue')
+plot_kde_for_each_row(imsds_wt,ax,color='black')
+plt.tight_layout()
+plt.show()

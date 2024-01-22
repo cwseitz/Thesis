@@ -113,6 +113,7 @@ prefixes_bd += [
 '231226_BD_5mw_100ms_JF646_2pm_1hour__9'
 ]
 
+min_traj_length = 80
 with open('plot_msd_1.json', 'r') as f:
     config = json.load(f)
 
@@ -121,7 +122,7 @@ for n,prefix in enumerate(prefixes):
     print("Processing " + prefix)
     tracker = Tracker2D()
     linked = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_link.csv')
-    linked = tp.filter_stubs(linked,80)
+    linked = tp.filter_stubs(linked,min_traj_length)
     imsd = tracker.imsd(linked)
     imsds.append(imsd)
     
@@ -132,27 +133,59 @@ for n,prefix in enumerate(prefixes_jq1):
     print("Processing " + prefix)
     tracker = Tracker2D()
     linked = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_link.csv')
-    linked = tp.filter_stubs(linked,80)
+    linked = tp.filter_stubs(linked,min_traj_length)
     imsd = tracker.imsd(linked)
     imsds_jq1.append(imsd)
     
 imsds_jq1 = pd.concat(imsds_jq1,axis=1)
+
+with open('plot_msd_2.json', 'r') as f:
+    config = json.load(f)
+
+imsds_wt = []
+for n,prefix in enumerate(prefixes_wt):
+    print("Processing " + prefix)
+    tracker = Tracker2D()
+    linked = pd.read_csv(config['analpath'] + 'WT/' + prefix + '/' + prefix + '_link.csv')
+    linked = tp.filter_stubs(linked,min_traj_length)
+    imsd = tracker.imsd(linked,max_lag=10)
+    imsds_wt.append(imsd)
+    
+imsds_wt = pd.concat(imsds_wt,axis=1,ignore_index=True)
+    
+imsds_bd = []
+for n,prefix in enumerate(prefixes_bd):
+    print("Processing " + prefix)
+    tracker = Tracker2D()
+    linked = pd.read_csv(config['analpath'] + 'BD/' + prefix + '/' + prefix + '_link.csv')
+    linked = tp.filter_stubs(linked,min_traj_length)
+    imsd = tracker.imsd(linked,max_lag=10)
+    imsds_bd.append(imsd)
+    
+imsds_bd = pd.concat(imsds_bd,axis=1,ignore_index=True)
+
     
 fig,ax=plt.subplots()
 plot_msds(imsds,ax,color='black')
-plot_msds(imsds_jq1,ax,color='red')
+#plot_msds(imsds_jq1,ax,color='red')
+plot_msds(imsds_wt,ax,color='cyan')
+plot_msds(imsds_bd,ax,color='blue')
 plt.show()
 
 fig, ax = plt.subplots(figsize=(3.5,3))
 plot_avg_msd(imsds,ax,color='black',label='Control')
-plot_avg_msd(imsds_jq1,ax,color='red',label='JQ1')
+#plot_avg_msd(imsds_jq1,ax,color='red',label='JQ1')
+plot_avg_msd(imsds_wt,ax,color='cyan',label='WT')
+plot_avg_msd(imsds_bd,ax,color='blue',label='BD')
 plt.show()
 
 nrows = imsds.shape[0]
 fig,ax=plt.subplots(2,5,figsize=(10,4))
 ax = ax.ravel()
-plot_kde_for_each_row(imsds_jq1,ax,color='red')
+#plot_kde_for_each_row(imsds_jq1,ax,color='red')
 plot_kde_for_each_row(imsds,ax,color='black')
+plot_kde_for_each_row(imsds_bd,ax,color='blue')
+plot_kde_for_each_row(imsds_wt,ax,color='cyan')
 plt.tight_layout()
 plt.show()
 

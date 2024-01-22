@@ -5,19 +5,16 @@ import trackpy as tp
 from DeepSMLM.torch.dataset import SMLMDataset
 from BaseSMLM.utils import make_animation, Tracker2D
 from skimage.io import imread
+from trackpy.motion import direction_corr, velocity_corr
 
 prefixes = [
-'231226_BD_5mw_100ms_JF646_2pm_1hour__14',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__18',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__20',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__21',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__3',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__33',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__34',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__35',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__42',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__5',
-'231226_BD_5mw_100ms_JF646_2pm_1hour__9'
+'231226_WT_5mw_100ms_JF646_2pm_1hour__15',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__16',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__23',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__24',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__26',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__33',
+'231226_WT_5mw_100ms_JF646_2pm_1hour__3'
 ]
 
 prefixes = [
@@ -34,6 +31,21 @@ prefixes = [
 ]
 
 prefixes = [
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__10',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__18',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__19',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__20',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__35',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__36',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__38',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__39',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__42',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__45',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__57',
+'231206_JQ1_646_2pm_1hour_L640_5mW_100ms__8'
+]
+
+prefixes = [
 '231206_JQ1_646_2pm_1hour_L640_5mW_100ms__11',
 '231206_JQ1_646_2pm_1hour_L640_5mW_100ms__14',
 '231206_JQ1_646_2pm_1hour_L640_5mW_100ms__15',
@@ -45,6 +57,19 @@ prefixes = [
 '231206_JQ1_646_2pm_1hour_L640_5mW_100ms__5',
 '231206_JQ1_646_2pm_1hour_L640_5mW_100ms__7',
 '231206_JQ1_646_2pm_1hour_L640_5mW_100ms__9'
+]
+
+
+prefixes = [
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__11',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__18',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__22',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__23',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__25',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__29',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__37',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__39',
+'231206_Control_646_2pm_1hour_L640_5mW_100ms__7'
 ]
 
 prefixes = [
@@ -64,6 +89,35 @@ prefixes = [
 '231206_Control_646_2pm_1hour_L640_5mW_100ms__9',
 ]
 
+
+
+prefixes = [
+'231226_BD_5mw_100ms_JF646_2pm_1hour__14',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__18',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__20',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__21',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__3',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__33',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__34',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__35',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__42',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__5',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__9'
+]
+
+prefixes = [
+'231226_BD_5mw_100ms_JF646_2pm_1hour__16',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__17',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__25',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__29',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__30',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__38',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__39',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__40',
+'231226_BD_5mw_100ms_JF646_2pm_1hour__8'
+]
+
+
 with open('run_track_2d.json', 'r') as f:
     config = json.load(f)
 
@@ -75,18 +129,14 @@ for n,prefix in enumerate(prefixes):
     spots = spots.loc[spots['conv'] == True]
     spots = spots.loc[(spots['x_err']  < 0.03) & (spots['y_err']  < 0.03)]
     linked = tracker.link(spots)
-    linked = tp.filter_stubs(linked,80)
+    linked = tp.filter_stubs(linked,50)
     tp.plot_traj(linked,superimpose=dataset.stack[0],
                  pos_columns=['y_mle','x_mle'])
                  
-    """
-    linked.to_csv(config['analpath'] + prefix + '/' + prefix + '_link.csv')
+    #linked.to_csv(config['analpath'] + prefix + '/' + prefix + '_link.csv')
 
-    im = tracker.imsd(linked)
-    im.to_csv(config['analpath'] + prefix + '/' + prefix + '_msd.csv')
-    vh = tracker.vanhove(linked)
-    vh.to_csv(config['analpath'] + prefix + '/' + prefix + '_vhe.csv')
-    """
+    
+
 
 
 
