@@ -321,6 +321,88 @@ prefixes = [
 '240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___7'
 ]
 
+
+prefixes = [
+'240119_SMT_7D_JF646_1.5pm_1h_L640_5mW_100ms___4',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_12',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_17',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_21',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_22',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_27',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_3'
+]
+
+prefixes = [
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___11',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___13',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___15',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___17',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___23',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___2',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___32',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___33',
+'240118_SMT_7A_JF646_1.5pm_1h_L640_5mW_100ms___34'
+]
+
+prefixes = [
+'240119_SMT_7a_JF646_2.5pm_overnight_L640_30mW_10ms___23',
+'240119_SMT_7a_JF646_2.5pm_overnight_L640_30mW_10ms___27',
+'240119_SMT_7a_JF646_2.5pm_overnight_L640_30mW_10ms___28',
+'240119_SMT_7a_JF646_2.5pm_overnight_L640_30mW_10ms___32',
+'240119_SMT_7a_JF646_2.5pm_overnight_L640_30mW_10ms___35',
+'240119_SMT_7a_JF646_2.5pm_overnight_L640_30mW_10ms___4'
+]
+
+prefixes = [
+'240119_SMT_7d_JF646_2.5pm_overnight_L640_30mW_10ms___21',
+'240119_SMT_7d_JF646_2.5pm_overnight_L640_30mW_10ms___30'
+]
+
+
+prefixes = [
+'240125_rep2_7D_cotransfection_storm_3pm_overnight__14',
+'240125_rep2_7D_cotransfection_storm_3pm_overnight__15',
+'240125_rep2_7D_cotransfection_storm_3pm_overnight__18',
+'240125_rep2_7D_cotransfection_storm_3pm_overnight__34',
+'240125_rep2_7D_cotransfection_storm_3pm_overnight__4',
+'240125_rep2_7D_cotransfection_storm_3pm_overnight__9'
+]
+
+prefixes = [
+'240125_rep2_7A_cotransfection_storm_3pm_overnight__11',
+'240125_rep2_7A_cotransfection_storm_3pm_overnight__18',
+'240125_rep2_7A_cotransfection_storm_3pm_overnight__2',
+'240125_rep2_7A_cotransfection_storm_3pm_overnight__3',
+'240125_rep2_7A_cotransfection_storm_3pm_overnight__5',
+'240125_rep2_7A_cotransfection_storm_3pm_overnight__8'
+]
+
+prefixes = [
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___35',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___9',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___20',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___25',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___4',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___26',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___24',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___15',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___32',
+'240116_SMT_CONTROL_646_2pm_1hour_L640_5mW_100ms___33'
+]
+
+prefixes = [
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___10',
+#'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___12',
+#'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___15',
+#'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___16',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___1',
+#'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___20',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___22',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___3',
+#'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___6',
+#'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___8'
+]
+
 def cc(image):
     fig,ax=plt.subplots()
     image_product = np.fft.fft2(image) * np.fft.fft2(image).conj()
@@ -338,7 +420,7 @@ for prefix in prefixes:
     dataset = SMLMDataset(config['datapath']+prefix,prefix)
     pipe = PipelineMLE2D(config,dataset)
     pipe.localize(plot_spots=False,plot_fit=False,fit=True,tmax=200)
-    #spots = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_spots.csv')
+    spots = pd.read_csv(config['analpath'] + prefix + '/' + prefix + '_spots.csv')
     #spots = spots.loc[spots['conv'] == True]
     #spots = spots.loc[(spots['x_err']  < 0.1) & (spots['y_err']  < 0.1)]    
     #render = KDE(spots).forward(sigma=2.0)
