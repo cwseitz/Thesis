@@ -8,7 +8,6 @@ from BaseSMLM.psf.psf2d import crlb2d
 Cramer-Rao bound for shot-noise limited regime and SPAD simulation
 """
 
-
 class CRB2D:
     def __init__(self,cmos_params):
         self.cmos_params = cmos_params
@@ -16,14 +15,11 @@ class CRB2D:
     def forward(self,N0space):
         crlb_n0 = np.zeros((len(N0space),4))
         for i,n0 in enumerate(N0space):
-            theta0 = np.array([3.5,3.5,0.92,n0])
+            theta0 = np.array([3.5,3.5,0.55,n0])
             crlb_n0[i] = crlb2d(theta0,self.cmos_params)
         return crlb_n0
 
 
-with open('run_spad_2d.json', 'r') as f:
-    config = json.load(f)
-    
 fig,ax=plt.subplots(figsize=(3,3))
 N0space = np.linspace(5,1000,500)
     
@@ -50,7 +46,7 @@ ax.set_ylabel('Localization uncertainty (nm)')
 ax.legend()
 ax.set_title('Cramer-Rao Bound')
 plt.tight_layout()
-plt.savefig('/home/cwseitz/Desktop/SPAD_CRB.png',dpi=300)
+#plt.savefig('/home/cwseitz/Desktop/SPAD_CRB.png',dpi=300)
 plt.show()
     
 

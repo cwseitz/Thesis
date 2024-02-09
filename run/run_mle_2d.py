@@ -403,6 +403,29 @@ prefixes = [
 #'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___8'
 ]
 
+prefixes = [
+'240119_SMT_7D_JF646_1.5pm_1h_L640_5mW_100ms___7',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_13',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_16',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_18',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_19',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_23',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_24',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_25',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_26',
+'240121_SMT_7D_JF646_1.5pm_1h_L640_5mW_100m_9'
+]
+
+prefixes = [
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___13',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___17',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___18',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___21',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___23',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___25',
+'240117_SMT_silenceBRD4_646_2pm_1hour_L640_5mW_100ms___5'
+]
+
 def cc(image):
     fig,ax=plt.subplots()
     image_product = np.fft.fft2(image) * np.fft.fft2(image).conj()
