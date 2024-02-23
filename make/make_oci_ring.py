@@ -17,25 +17,25 @@ def linear_interpolation(image):
             image[row,col] = 1.0
     return image
 
-with open('make_oci_disc.json', 'r') as f:
+with open('make_oci_ring.json', 'r') as f:
     config = json.load(f)
     
 stack = []; theta = []; spikes = []; summed = []
 show = False
 for n in range(config['ngenerate']):
     print(f'Generating frame {n}')
-    disc2d = Disc2D_TwoState(config['nx'],config['ny'])
+    ring2d = GaussianRing2D_TwoState(config['nx'],config['ny'])
     nspots = config['nspots']
     args = [config['radius'],nspots]
     fig,ax=plt.subplots(1,2)
     kwargs = config['kwargs']
-    adu,_spikes,_theta = disc2d.forward(*args,**kwargs)
+    adu,_spikes,_theta = ring2d.forward(*args,**kwargs)
     ssum = np.sum(adu,axis=0)
     g2 = G2(adu)
     g2 = linear_interpolation(g2)
     if show:
         fig,ax=plt.subplots(1,2)
-        ax[0].imshow(adu); ax[1].imshow(g2)
+        ax[0].imshow(ssum); ax[1].imshow(g2)
         plt.show()
     _spikes = _spikes.astype(np.int16)
     stack.append(g2); spikes.append(_spikes[0])
@@ -44,7 +44,6 @@ for n in range(config['ngenerate']):
 stack = np.array(stack); theta = np.array(theta); spikes = np.array(spikes)
 summed = np.array(summed)
 imsave(config['savepath']+config['prefix']+'_adu.tif',stack)
-#imsave(config['savepath']+config['prefix']+'_counts.tif',summed)
 imsave(config['savepath']+config['prefix']+'_spikes.tif',spikes)
 file = config['savepath']+config['prefix']+'.npz'
 np.savez(file,theta=theta)

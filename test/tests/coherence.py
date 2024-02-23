@@ -33,7 +33,7 @@ class CNNCoherence_Test:
     def test(self,plot=True):
         config = self.config
         disc2d = GaussianRing2D_TwoState(config['nx'],config['ny'])
-        args = [config['disc_radius'],config['nspots']]
+        args = [config['ring_radius'],config['nspots']]
         kwargs = config['kwargs']
         adu,spikes,thetagt =\
         disc2d.forward(*args,**kwargs,show=False)

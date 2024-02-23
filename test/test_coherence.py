@@ -9,7 +9,7 @@ config = {
 "kwargs":{
 "texp": 1.0,
 "eta": 0.5,
-"sigma": 0.92,
+"sigma": 0.55,
 "N00": 0,
 "N01": 100,
 "B0": 10,
@@ -17,11 +17,11 @@ config = {
 "offset": 0.0,
 "var": 0.0,
 "nframes":100,
-"sigma_ring": 0.39
+"sigma_ring": 0.39,
 },
-"disc_radius": 1.56,
-"nspots" : 5,
-"modelname": "0122_034355",
+"ring_radius": 0.8,
+"nspots" : 3,
+"modelname": "0124_070823",
 "thresh_cnn": 30,
 "pixel_size_lateral": 108.3,
 "radius": 3

@@ -1,11 +1,11 @@
 {
-"savepath": "/home/cwseitz/Desktop/Torch/Train/",
+"savepath": "/home/cwseitz/Desktop/Torch/Ring2D/",
 "ngenerate": 10000,
 "prefix": "240118_Coherence2D",
 "nx": 20,
 "ny": 20,
-"radius": 3.0,
-"nspots": 5,
+"radius":1.56,
+"nspots": 3,
 "kwargs":{
 "texp": 1.0,
 "eta": 0.5,
@@ -16,6 +16,7 @@
 "B0": 10,
 "gain": 1.0,
 "offset": 0.0,
-"var": 0.0
+"var": 0.0,
+"sigma_ring":0.39
 }
 }
