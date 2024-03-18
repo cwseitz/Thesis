@@ -6,7 +6,7 @@ from BaseSMLM.utils import BasicKDE
 from skimage.io import imsave
 from skimage import exposure
 from skimage.filters import gaussian
-from diffusion.interpolate import G2
+from BaseSMLM.interpolate import G2
 from scipy.ndimage import zoom
 from skimage.exposure import rescale_intensity
 
@@ -27,21 +27,22 @@ class Dataset:
         ax[2].imshow(RGB); ax[2].set_title('KDE/SPLINE')
         plt.tight_layout()
         plt.show()    
-    def make_dataset(self,generator,args,kwargs,upsample=8,interpolate=False,show=False):
+    def make_dataset(self,generator,args,kwargs,upsample=8,sigma_kde=3.0,sigma_gauss=1.0,interpolate=False,show=False):
         pad = upsample // 2
         Xs = []; Ys = []; Zs = []; Ss = []
         for n in range(self.ngenerate):
             print(f'Generating sample {n}')
+            args[1] = np.random.randint(1,5)
             G = generator.forward(*args,**kwargs)
             theta = G[2][:2,:].T; S = G[1]
             X = rescale_intensity(G[0],out_range=self.X_type)
             if interpolate:
                 X = rescale_intensity(G2(G[0]),out_range=self.X_type)
-                X = gaussian(X,sigma=1.0,preserve_range=True)
+                X = gaussian(X,sigma=sigma_gauss,preserve_range=True)
                 theta = 2*theta
             nx,ny = X.shape
             Y = zoom(X,(upsample,upsample),order=3)
-            Z = BasicKDE(theta).forward(nx,upsample=upsample,sigma=3.0)
+            Z = BasicKDE(theta).forward(nx,upsample=upsample,sigma=sigma_kde)
             Z = np.pad(Z,((pad,0),(pad,0)))
             Z = Z[:-pad,:-pad]
             Z = rescale_intensity(Z,out_range=self.Z_type)
